@@ -4,7 +4,7 @@ class ServiceRegistry {
   constructor(log) {
     this.log = log;
     this.services = {};
-    this.timeout = 10;
+    this.timeout = 30;
   }
 
   get(name, version) {
@@ -32,7 +32,7 @@ class ServiceRegistry {
       return key;
     }
     // update service
-    this.serivces[key].timestamp = Math.floor(new Date() / 1000);
+    this.services[key].timestamp = Math.floor(new Date() / 1000);
     this.log.debug(`Updated services ${name}, version ${version}, at ${ip}:${port}`);
     return key;
   }
