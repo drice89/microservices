@@ -5,6 +5,7 @@ const pjs = require('../package.json');
 // Get some meta info from the package.json
 const { name, version } = pjs;
 
+const path = require('path')
 // Set up a logger
 const getLogger = (serviceName, serviceVersion, level) => bunyan.createLogger({ name: `${serviceName}:${serviceVersion}`, level });
 
@@ -14,18 +15,27 @@ module.exports = {
     name,
     version,
     serviceTimeout: 30,
+    data: {
+      speakers: path.join(__dirname, './data/speakers.json')
+    },
     log: () => getLogger(name, version, 'debug'),
   },
   production: {
     name,
     version,
     serviceTimeout: 30,
+    data: {
+      speakers: path.join(__dirname, './data/speakers.json')
+    },
     log: () => getLogger(name, version, 'info'),
   },
   test: {
     name,
     version,
     serviceTimeout: 30,
+    data: {
+      speakers: path.join(__dirname, './data/speakers.json')
+    },
     log: () => getLogger(name, version, 'fatal'),
   },
 };

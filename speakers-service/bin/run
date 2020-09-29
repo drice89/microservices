@@ -23,6 +23,8 @@ server.on('listening', () => {
     await unregisterService();
   }
 
+
+  // handle errors. If error is emmited from the event loop, then unregister the process and exit 
   process.on('uncaughtException', async () => {
     await cleanup();
     process.exit(0);
@@ -37,10 +39,6 @@ server.on('listening', () => {
     await cleanup();
     process.exit(0);
   });
-
-  setTimeout(() => {
-    throw new Error('somethinghappnedd');
-  }, 10000)
 
   log.info(
     `Hi there! I'm listening on port ${server.address().port} in ${service.get('env')} mode.`,
