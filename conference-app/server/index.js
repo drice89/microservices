@@ -6,6 +6,7 @@ const configs = require('./config');
 const Speakers = require('./services/Speakers');
 const Feedback = require('./services/Feedback');
 const routes = require('./routes');
+const { Server } = require('http');
 
 const app = express();
 
@@ -55,6 +56,7 @@ app.use((err, req, res, next) => {
   return res.render('error');
 });
 
-app.listen(3080);
+app.listen(3080, () => {console.log("listening on 3000")});
+
 
 module.export = app;
