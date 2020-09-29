@@ -1,13 +1,12 @@
-const fs = require('fs');
-const util = require('util');
+
 const axios = require('axios');
 
 
-const readFile = util.promisify(fs.readFile);
-
 class SpeakersService {
-  constructor(datafile) {
-    this.datafile = datafile;
+  //accepts the config object then destructures the url and version
+  constructor({serviceRegistryUrl, serviceVersionIdentifier}) {
+    this.serviceRegistryUrl = serviceRegistryUrl;
+    this.serviceVersionIdentifier = serviceVersionIdentifier;
   }
 
   async getNames() {
@@ -64,7 +63,7 @@ class SpeakersService {
   } 
 
   async getService(servicename) {
-    const res = await axios.get(`http://localhost:3000/find/${servicename}/1`);
+    const res = await axios.get(`${this.serviceRegistryUrl}/find/${servicename}/${this.serviceVersionIdentifier}`);
     return res.data;
   }
 }
